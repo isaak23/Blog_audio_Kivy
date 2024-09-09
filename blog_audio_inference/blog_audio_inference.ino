@@ -1,4 +1,4 @@
-#include <Blog-Project_inferencing.h>
+#include <Blog-Project_inferencing.h> //ei-blog-project-arduino-1.0.7.zip
 
 // Numero di campioni da leggere dal pin analogico
 #define NUM_SAMPLES 400
