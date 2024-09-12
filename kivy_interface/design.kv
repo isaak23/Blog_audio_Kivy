@@ -1,0 +1,30 @@
+#:kivy 2.3.0
+<MyLayout>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    Spinner:
+        id: port_spinner
+        text: 'Seleziona porta seriale'
+        values: root.get_serial_ports()  # Ottiene la lista delle porte seriali
+        on_text: root.update_serial_port(self.text)
+
+    Button:
+        text: 'Accendi LED'
+        size_hint: 1, 0.2
+        on_press: root.accendi_led()
+
+    Button:
+        text: 'Spegni LED'
+        size_hint: 1, 0.2
+        on_press: root.spegni_led()
+
+    # Aggiungi il TextInput come monitor seriale
+    TextInput:
+        id: serial_monitor
+        text: ''
+        readonly: True  # Imposta solo lettura
+        size_hint: 1, 0.5
+        font_size: 14
+
