@@ -1,30 +1,60 @@
 #:kivy 2.3.0
-<MyLayout>:
-    orientation: 'vertical'
-    padding: 10
-    spacing: 10
 
-    Spinner:
-        id: port_spinner
-        text: 'Seleziona porta seriale'
-        values: root.get_serial_ports()  # Ottiene la lista delle porte seriali
-        on_text: root.update_serial_port(self.text)
+<HomeScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 3
+            rows: 1
+            size_hint: 0.1, 0.1 #prendi il 10% del layout totale
+            padding: 0,6,0,0 # [padding_left, padding_top, padding_right, padding_bottom].
+            Spinner:
+                id: port_spinner
+                text: 'Seleziona porta seriale'
+                size_hint: None, None
+                size: 200, 50
+                values: root.get_serial_ports()  # Ottiene la lista delle porte seriali
+                on_text: root.update_serial_port(self.text)
+        GridLayout:
+            cols: 3
+            rows: 2
+            size_hint: 0.2, 0.2 #prendi il 20% del layout totale
+            Button:
+                text: 'Accendi LED'
+                size: 10,10
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                size_hint: 0.2, 0.2
+                on_press: root.accendi_led()
+            Button:
+                text: 'Spegni LED'
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                size_hint: 0.2, 0.2
+                on_press: root.spegni_led()
+            Button:
+                text: 'Accendi LED'
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                size_hint: 0.2, 0.2
+                on_press: root.accendi_led()
+            Button:
+                text: 'Spegni LED'
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                size_hint: 0.2, 0.2
+                on_press: root.spegni_led()
+        GridLayout:
+            cols: 1
+            size_hint: 0.6, 0.6 #prendi il 70% del layout totale
+            # Aggiungi il TextInput come monitor seriale
+            TextInput:
+                id: serial_monitor
+                text: ''
+                readonly: True  # Imposta solo lettura
+                size_hint: 1, 0.5
+                font_size: 14
 
-    Button:
-        text: 'Accendi LED'
-        size_hint: 1, 0.2
-        on_press: root.accendi_led()
-
-    Button:
-        text: 'Spegni LED'
-        size_hint: 1, 0.2
-        on_press: root.spegni_led()
-
-    # Aggiungi il TextInput come monitor seriale
-    TextInput:
-        id: serial_monitor
-        text: ''
-        readonly: True  # Imposta solo lettura
-        size_hint: 1, 0.5
-        font_size: 14
-
+<RootWidget>:
+    HomeScreen:
+        name: "home_screen"

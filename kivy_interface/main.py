@@ -1,6 +1,5 @@
-import kivy
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.clock import Clock  # Per aggiornare l'interfaccia in base a un timer
 import serial
@@ -9,7 +8,10 @@ import serial.tools.list_ports
 # Carica il file design.kv
 Builder.load_file('design.kv')
 
-class MyLayout(BoxLayout):
+class RootWidget(ScreenManager):
+    pass
+
+class HomeScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.serial_connection = None
@@ -52,9 +54,9 @@ class MyLayout(BoxLayout):
 
 class ArduinoApp(App):
     def build(self):
-        return MyLayout()
+        return RootWidget()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ArduinoApp().run()
 
 
